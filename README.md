@@ -3,5 +3,6 @@ Foundation for other Spring MVC projects, features:
 - Spring MVC 4.x with code config
 - WebApplicationInitializer, WebMvcConfigurerAdapter
 - no WEB.xml
+- tested on Jetty 9
 
 See more on: http://itblues.pl/
