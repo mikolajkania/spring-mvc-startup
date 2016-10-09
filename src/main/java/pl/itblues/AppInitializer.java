@@ -3,6 +3,7 @@ package pl.itblues;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import pl.itblues.web.config.WebAppConfig;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ public class AppInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(WebAppConfig.class);
+        applicationContext.register(AppConfig.class);//todo co z web
 
         DispatcherServlet clientServlet = new DispatcherServlet(applicationContext);
         ServletRegistration.Dynamic servlet = servletContext.addServlet("clientServlet", clientServlet);
