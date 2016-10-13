@@ -9,12 +9,12 @@ import pl.itblues.services.PropertyService;
  * Created by Mikolaj Kania on 24.09.2016.
  */
 @RestController
-public class ClientController {
+public class DataController {
 
     private PropertyService propertyService;
 
     @Autowired
-    public ClientController(PropertyService propertyService) {
+    public DataController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
 
