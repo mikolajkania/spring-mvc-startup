@@ -24,4 +24,10 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/view/**").addResourceLocations("/views/");
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("view/index.html");
+        registry.addViewController("/404").setViewName("view/404.html");
+    }
+
 }
