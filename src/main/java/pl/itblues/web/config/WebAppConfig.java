@@ -28,6 +28,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("view/index.html");
         registry.addViewController("/404").setViewName("view/404.html");
+        registry.addRedirectViewController("/index", "/");
     }
 
 }
