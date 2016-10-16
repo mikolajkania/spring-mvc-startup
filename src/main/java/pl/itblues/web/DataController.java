@@ -2,6 +2,8 @@ package pl.itblues.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.itblues.services.PropertyService;
 
@@ -21,5 +23,10 @@ public class DataController {
     @GetMapping(value = "/hello")
     public String hello() {
         return "Hello " + propertyService.receiver + "!";
+    }
+
+    @GetMapping(value = "/hello/{world}")
+    public String helloWorld(@PathVariable String world) {
+        return "Hello " + world  + "!";
     }
 }
