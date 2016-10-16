@@ -1,8 +1,10 @@
 package pl.itblues;
 
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import pl.itblues.services.config.ServicesConfig;
 import pl.itblues.web.config.WebAppConfig;
 
 import javax.servlet.ServletContext;
@@ -15,12 +17,15 @@ import javax.servlet.ServletRegistration;
 public class AppInitializer implements WebApplicationInitializer {
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(AppConfig.class);//todo co z web
+    public void onStartup(ServletContext container) throws ServletException {
+        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        rootContext.register(ServicesConfig.class);
+        container.addListener(new ContextLoaderListener(rootContext));
 
-        DispatcherServlet clientServlet = new DispatcherServlet(applicationContext);
-        ServletRegistration.Dynamic servlet = servletContext.addServlet("clientServlet", clientServlet);
+        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+        dispatcherContext.register(WebAppConfig.class);
+
+        ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
     }
