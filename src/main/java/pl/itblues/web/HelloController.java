@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
  * Created by Mikolaj Kania on 24.09.2016.
  */
 @RestController
-public class HelloController {  //todo reqmap /hello for all?
+public class HelloController {
 
     private PropertyService propertyService;
 
@@ -32,5 +32,15 @@ public class HelloController {  //todo reqmap /hello for all?
     @GetMapping(value = "/hello/{world}")
     public String helloWorld(@PathVariable String world) {
         return "Hello " + world  + "!";
+    }
+
+    @GetMapping(value = "/please/{wait}")
+    public Callable<String> pleaseWait(@PathVariable long wait) {
+        return new Callable<String>() {
+            public String call() throws InterruptedException {
+                Thread.sleep(wait);
+                return "Hello, waited " + wait  + "!";
+            }
+        };
     }
 }
