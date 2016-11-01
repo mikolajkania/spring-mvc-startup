@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.itblues.services.PropertyService;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Mikolaj Kania on 24.09.2016.
@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 @RestController
 public class HelloController {
 
-    private PropertyService propertyService;
+    private final PropertyService propertyService;
 
     @Autowired
     public HelloController(PropertyService propertyService) {
@@ -32,15 +32,5 @@ public class HelloController {
     @GetMapping(value = "/hello/{world}")
     public String helloWorld(@PathVariable String world) {
         return "Hello " + world  + "!";
-    }
-
-    @GetMapping(value = "/please/{wait}")
-    public Callable<String> pleaseWait(@PathVariable long wait) {
-        return new Callable<String>() {
-            public String call() throws InterruptedException {
-                Thread.sleep(wait);
-                return "Hello, waited " + wait  + "!";
-            }
-        };
     }
 }
