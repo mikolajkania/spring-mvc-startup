@@ -25,7 +25,7 @@ public class HelloController {
 
     @GetMapping(value = "/hello")
     public String hello(HttpEntity<byte[]> requestEntity) {
-        return "Hello " + propertyService.receiver + "! You browse web with "
+        return "Hello " + propertyService.receiver + "! You are browsing web with "
                 + requestEntity.getHeaders().get("user-agent");
     }
 
